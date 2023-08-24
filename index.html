@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Border Radius Previewer</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="content-box">
+        <h4>All units are in px - 4 values</h4>
+        <div id="shape"></div>
+        <div class="adjustors">
+            <div class="input-ele">
+                <p>Top Left</p>
+                <input id="tl" type="number" value="0" min="0">
+            </div>
+            <div class="input-ele">
+                <p>Top Right</p>
+                <input id="tr" type="number" value="0" min="0">
+            </div>
+            <div class="input-ele">
+                <p>Bottom Left</p>
+                <input id="bl" type="number" value="0" min="0">
+            </div>
+            <div class="input-ele">
+                <p>Bottom Right</p>
+                <input id="br" type="number" value="0" min="0">
+            </div>
+        </div>
+        <button id="gen" onclick="generate()">Generate CSS</button>
+    </div>
+    <div id="result-box">
+        <h3>Generated CSS</h3>
+        <p id="result"></p>
+        <button onclick="copy()">Copy to clipboard</button>
+        <p id="copy-alert"></p>
+    </div>
+
+    <script>
+        const shape = document.getElementById("shape");
+        const topLeft = document.getElementById("tl");
+        const topRight = document.getElementById("tr");
+        const bottomLeft = document.getElementById("bl");
+        const bottomRight = document.getElementById("br");
+
+        // Change specific border radius on user input and ensure no negative is input
+        topLeft.addEventListener("input", e => {
+            if (topLeft.value < 0) { topLeft.value = 0};
+            shape.style.borderTopLeftRadius = topLeft.value + "px";
+        });
+        topRight.addEventListener("input", e => {
+            if (topRight.value < 0) { topRight.value = 0};
+            shape.style.borderTopRightRadius = topRight.value + "px";
+        });
+        bottomLeft.addEventListener("input", e => {
+            if (bottomLeft.value < 0) { bottomLeft.value = 0};
+            shape.style.borderBottomLeftRadius = bottomLeft.value + "px";
+        });
+        bottomRight.addEventListener("input", e => {
+            if (bottomRight.value < 0) { bottomRight.value = 0};
+            shape.style.borderBottomRightRadius = bottomRight.value + "px";
+        });
+
+        // Display css via a template which has the users inputs
+        function generate() {
+            const cssTemplate = `.shape {\nborder-top-left-radius: ${topLeft.value}px;\nborder-top-right-radius: ${topRight.value}px;\nborder-bottom-left-radius: ${bottomLeft.value}px;\nborder-bottom-right-radius: ${bottomRight.value}px;\nheight: 200px;\nwidth: 200px;\nbackground-color: green;\n}`;
+            document.getElementById("result").innerText = cssTemplate;
+            document.getElementById("result-box").style.display = "flex";
+        }
+
+        // Copy to clipboard
+        function copy() {
+            let value = document.getElementById("result").innerText;
+            navigator.clipboard.writeText(value);
+            document.getElementById("copy-alert").innerText = "CSS has been copied!";
+            const copyAlert = () => {
+                document.getElementById("copy-alert").innerText = "";
+            }
+            setTimeout(copyAlert, 3000); // Display copy message then after 3 seconds remove it
+        }
+    </script>
+</body>
+</html>

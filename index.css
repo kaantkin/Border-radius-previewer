@@ -1,0 +1,63 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-box {
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+#shape {
+    border-radius: 0px;
+    height: 200px;
+    width: 200px;
+    background-color: green;
+}
+
+.adjustors {
+    display: grid;
+    grid-template-columns: auto auto;
+    text-align: center;
+    column-gap: 20px;
+    margin-top: 5px;
+}
+
+.adjustors input {
+    width: 50px;
+    padding: 5px;
+    height: min-content;
+    margin-left: 10px;
+}
+
+#gen {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+#result-box {
+    width: 700px;
+    height: 500px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin-left: 40px;
+}
+
+#result-box button {
+    margin-top: 10px;
+}
